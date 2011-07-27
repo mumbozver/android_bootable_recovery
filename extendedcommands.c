@@ -430,7 +430,7 @@ int format_unknown_device(const char* root)
 }
 
 #define MOUNTABLE_COUNT 5
-#define MTD_COUNT 4
+#define MTD_COUNT 3
 #define MMC_COUNT 2
 
 void show_partition_menu()
@@ -453,7 +453,7 @@ void show_partition_menu()
         };
 
     string mtds[MTD_COUNT][2] = {
-        { "format boot", "BOOT:" },
+/*        { "format boot", "BOOT:" },*/
         { "format system", "SYSTEM:" },
         { "format data", "DATA:" },
         { "format cache", "CACHE:" },
@@ -857,7 +857,7 @@ void show_advanced_menu()
                 sddevice[strlen("/dev/block/mmcblkX")] = NULL;
                 char cmd[PATH_MAX];
                 setenv("SDPATH", sddevice, 1);
-                sprintf(cmd, "sdparted -es %s -ss %s -efs ext3 -s", ext_sizes[ext_size], swap_sizes[swap_size]);
+                sprintf(cmd, "sdparted -es %s -ss %s -efs ext4 -s", ext_sizes[ext_size], swap_sizes[swap_size]);
                 ui_print("Partitioning SD Card... please wait...\n");
                 if (0 == __system(cmd))
                     ui_print("Done!\n");
@@ -909,7 +909,7 @@ void show_advanced_menu()
                 sddevice[strlen("/dev/block/mmcblkX")] = NULL;
                 char cmd[PATH_MAX];
                 setenv("SDPATH", sddevice, 1);
-                sprintf(cmd, "sdparted -es %s -ss %s -efs ext3 -s", ext_sizes[ext_size], swap_sizes[swap_size]);
+                sprintf(cmd, "sdparted -es %s -ss %s -efs ext4 -s", ext_sizes[ext_size], swap_sizes[swap_size]);
                 ui_print("Partitioning Internal SD Card... please wait...\n");
                 if (0 == __system(cmd))
                     ui_print("Done!\n");
